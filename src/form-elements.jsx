@@ -1339,6 +1339,7 @@ class Range extends React.Component {
     props.max = this.props.data.max_value;
     props.step = this.props.data.step;
     props.value = this.state.value;
+    props.disabled = this.props.read_only ? 'disabled' : '';
 
     if (this.props.mutable) {
       props.ref = this.inputField;
@@ -1395,7 +1396,7 @@ class Range extends React.Component {
         )}
         <div className="form-group">
           <label className="form-label">
-            {this.props.data.label}
+          <span dangerouslySetInnerHTML={{ __html: this.props.data.label }} />
             {this.props.data.hasOwnProperty('required') &&
               this.props.data.required === true &&
               !this.props.read_only && (
@@ -1416,6 +1417,7 @@ class Range extends React.Component {
               max={this.props.data.max_value}
               min={this.props.data.min_value}
               change={this.changeValue}
+              disabled={props.disabled}
             />
           </div>
           <div className="visible_marks">{visible_marks}</div>

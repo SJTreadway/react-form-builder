@@ -134,6 +134,14 @@ export default class ReactForm extends React.Component {
           if ($item.value === 0) {
             invalid = true;
           }
+        } else if(item.element === 'Range') {
+          $item = {};
+          $item.value = ref.state.value;
+          // Needs to check for empty value except zero.
+          // Bacause range can start from zero.
+          if ($item.value === undefined || $item.value === null || $item.value === '') {
+            invalid = true;
+          }
         } else {
           if (item.element === 'Tags') {
             $item = {};
@@ -185,6 +193,8 @@ export default class ReactForm extends React.Component {
         if (!ref) return;
         if (item.element === 'Rating') {
           itemData.value = ref.inputField.current.state.rating;
+        } else if (item.element === 'Range') {
+          itemData.value = ref.state.value;
         } else {
           if (item.element === 'Tags') {
             itemData.value =
