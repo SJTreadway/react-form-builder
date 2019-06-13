@@ -392,7 +392,7 @@ class TextArea extends React.Component {
               {
                 isSentimentAdded && (
                   <span className={`form-text-area-sentiment ${sentimentalClass}`}><span className="sentimental-dot" />
-                    &nbsp;{`${this.props.data.sentiment.label} (${this.props.data.sentiment.score})`}
+                    &nbsp;{`${this.props.data.sentiment.label} (${this.props.data.sentiment.score}) Net Sentiment Score`}
                   </span>
                 )
               }
