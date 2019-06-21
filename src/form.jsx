@@ -460,7 +460,7 @@ export default class ReactForm extends React.Component {
               {!this.props.hide_actions && (
                 <input
                   type="submit"
-                  className="btn btn-school btn-big btn-agree"
+                  className="btn btn-school btn-big btn-success"
                   value={actionName}
                 />
               )}
