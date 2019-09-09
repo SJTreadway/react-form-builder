@@ -246,9 +246,7 @@ class TextInput extends React.Component {
             {this.props.data.hasOwnProperty('required') &&
               this.props.data.required === true &&
               !this.props.read_only && (
-                <span className="label-required label label-danger">
-                  Required
-                </span>
+                <span className="label-required label label-danger">Required</span>
               )}
           </label>
           <input {...props} />
@@ -313,9 +311,7 @@ class NumberInput extends React.Component {
             {this.props.data.hasOwnProperty('required') &&
               this.props.data.required === true &&
               !this.props.read_only && (
-                <span className="label-required label label-danger">
-                  Required
-                </span>
+                <span className="label-required label label-danger">Required</span>
               )}
           </label>
           <input {...props} />
@@ -354,7 +350,7 @@ class TextArea extends React.Component {
     const isSentimentAdded = !!this.props.data.sentiment && !!this.props.data.sentiment.label;
 
     if (isSentimentAdded) {
-      sentimentalClass = `${this.props.data.sentiment.label.toLowerCase()}`
+      sentimentalClass = `${this.props.data.sentiment.label.toLowerCase()}`;
     }
 
     return (
@@ -385,19 +381,17 @@ class TextArea extends React.Component {
             {this.props.data.hasOwnProperty('required') &&
               this.props.data.required === true &&
               !this.props.read_only && (
-                <span className="label-required label label-danger">
-                  Required
-                </span>
+                <span className="label-required label label-danger">Required</span>
               )}
-              {
-                isSentimentAdded && (
-                  <span className={`form-text-area-sentiment ${sentimentalClass}`}><span className="sentimental-dot" />
-                    &nbsp;{`${this.props.data.sentiment.label} (${this.props.data.sentiment.score}) Net Sentiment Score`}
-                  </span>
-                )
-              }
+            {isSentimentAdded && (
+              <span className={`form-text-area-sentiment ${sentimentalClass}`}>
+                <span className="sentimental-dot" />
+                &nbsp;
+                {`${this.props.data.sentiment.label} (${this.props.data.sentiment.score}) Net Sentiment Score`}
+              </span>
+            )}
           </label>
-          <textarea {...props} />
+          <textarea {...props} rows="8" />
         </div>
       </div>
     );
@@ -434,11 +428,8 @@ class DatePicker extends React.Component {
 
   handleChange = dt => {
     if (dt && dt.target) {
-      var placeholder =
-        dt && dt.target && dt.target.value === '' ? 'mm/dd/yyyy' : '';
-      var formattedDate = dt.target.value
-        ? moment(dt.target.value).format('YYYY-MM-DD')
-        : '';
+      var placeholder = dt && dt.target && dt.target.value === '' ? 'mm/dd/yyyy' : '';
+      var formattedDate = dt.target.value ? moment(dt.target.value).format('YYYY-MM-DD') : '';
 
       this.setState({
         value: formattedDate,
@@ -512,9 +503,7 @@ class DatePicker extends React.Component {
             {this.props.data.hasOwnProperty('required') &&
               this.props.data.required === true &&
               !this.props.read_only && (
-                <span className="label-required label label-danger">
-                  Required
-                </span>
+                <span className="label-required label label-danger">Required</span>
               )}
           </label>
           <div>
@@ -530,37 +519,35 @@ class DatePicker extends React.Component {
                 className="form-control"
               />
             )}
-            {iOS &&
-              !this.props.data.readOnly && (
-                <input
-                  type="date"
-                  name={props.name}
-                  ref={this.inputField}
-                  onChange={this.handleChange}
-                  dateFormat="MM/DD/YYYY"
-                  placeholder={this.state.placeholder}
-                  value={this.state.value}
-                  className="form-control"
-                  readOnly={this.props.read_only}
-                />
-              )}
-            {!iOS &&
-              !this.props.data.readOnly && (
-                <ReactDatePicker
-                  name={props.name}
-                  ref={this.inputField}
-                  onChange={this.handleChange}
-                  selected={this.state.internalValue}
-                  todayButton={'Today'}
-                  className="form-control"
-                  isClearable={!this.props.read_only}
-                  dateFormat="MM/DD/YYYY"
-                  placeholderText="mm/dd/yyyy"
-                  dropdownMode={'scroll'}
-                  disabled={this.props.read_only}
-                  readOnly={this.props.read_only}
-                />
-              )}
+            {iOS && !this.props.data.readOnly && (
+              <input
+                type="date"
+                name={props.name}
+                ref={this.inputField}
+                onChange={this.handleChange}
+                dateFormat="MM/DD/YYYY"
+                placeholder={this.state.placeholder}
+                value={this.state.value}
+                className="form-control"
+                readOnly={this.props.read_only}
+              />
+            )}
+            {!iOS && !this.props.data.readOnly && (
+              <ReactDatePicker
+                name={props.name}
+                ref={this.inputField}
+                onChange={this.handleChange}
+                selected={this.state.internalValue}
+                todayButton={'Today'}
+                className="form-control"
+                isClearable={!this.props.read_only}
+                dateFormat="MM/DD/YYYY"
+                placeholderText="mm/dd/yyyy"
+                dropdownMode={'scroll'}
+                disabled={this.props.read_only}
+                readOnly={this.props.read_only}
+              />
+            )}
           </div>
         </div>
       </div>
@@ -621,13 +608,11 @@ class Dropdown extends React.Component {
             {this.props.data.hasOwnProperty('required') &&
               this.props.data.required === true &&
               !this.props.read_only && (
-                <span className="label-required label label-danger">
-                  Required
-                </span>
+                <span className="label-required label label-danger">Required</span>
               )}
           </label>
           <select {...props}>
-            {this.props.data.options.map(function (option) {
+            {this.props.data.options.map(function(option) {
               let this_key = 'preview_' + option.key;
               return (
                 <option value={option.value} key={this_key}>
@@ -718,20 +703,18 @@ class Signature extends React.Component {
             {this.props.data.hasOwnProperty('required') &&
               this.props.data.required === true &&
               !this.props.read_only && (
-                <span className="label-required label label-danger">
-                  Required
-                </span>
+                <span className="label-required label label-danger">Required</span>
               )}
           </label>
           {this.props.read_only === true &&
-            this.props.defaultValue &&
-            this.props.defaultValue.length > 0 ? (
-              <div>
-                <img src={sourceDataURL} />
-              </div>
-            ) : (
-              <SignaturePad {...pad_props} />
-            )}
+          this.props.defaultValue &&
+          this.props.defaultValue.length > 0 ? (
+            <div>
+              <img src={sourceDataURL} />
+            </div>
+          ) : (
+            <SignaturePad {...pad_props} />
+          )}
           <input {...props} />
         </div>
       </div>
@@ -746,16 +729,16 @@ class Tags extends React.Component {
   }
 
   getDefaultValue = () => {
-    if(this.props.defaultValue !== undefined){
+    if (this.props.defaultValue !== undefined) {
       let selectedValues = this.props.defaultValue.split(',');
-      return this.props.data.options.filter(({label, value}) => selectedValues.includes(value));
+      return this.props.data.options.filter(({ label, value }) => selectedValues.includes(value));
     } else {
       return [];
     }
-  }
+  };
 
   state = {
-    value: this.getDefaultValue()
+    value: this.getDefaultValue(),
   };
 
   handleChange = e => {
@@ -763,7 +746,7 @@ class Tags extends React.Component {
   };
 
   componentDidCatch(e) {
-    console.log(e)
+    console.log(e);
   }
 
   render() {
@@ -823,9 +806,7 @@ class Tags extends React.Component {
             {this.props.data.hasOwnProperty('required') &&
               this.props.data.required === true &&
               !this.props.read_only && (
-                <span className="label-required label label-danger">
-                  Required
-                </span>
+                <span className="label-required label label-danger">Required</span>
               )}
           </label>
           <Select {...props} />
@@ -881,9 +862,7 @@ class Checkboxes extends React.Component {
             {this.props.data.hasOwnProperty('required') &&
               this.props.data.required === true &&
               !this.props.read_only && (
-                <span className="label-required label label-danger">
-                  Required
-                </span>
+                <span className="label-required label label-danger">Required</span>
               )}
           </label>
           {this.props.data.options.map(option => {
@@ -896,9 +875,7 @@ class Checkboxes extends React.Component {
 
             if (self.props.mutable) {
               props.defaultChecked =
-                self.props.defaultValue.indexOf(option.value) > -1
-                  ? true
-                  : false;
+                self.props.defaultValue.indexOf(option.value) > -1 ? true : false;
             }
 
             if (this.props.read_only) {
@@ -973,9 +950,7 @@ class RadioButtons extends React.Component {
             {this.props.data.hasOwnProperty('required') &&
               this.props.data.required === true &&
               !this.props.read_only && (
-                <span className="label-required label label-danger">
-                  Required
-                </span>
+                <span className="label-required label label-danger">Required</span>
               )}
           </label>
           {this.props.data.options.map(option => {
@@ -989,7 +964,7 @@ class RadioButtons extends React.Component {
             if (self.props.mutable) {
               props.defaultChecked =
                 self.props.defaultValue !== undefined &&
-                  self.props.defaultValue.indexOf(option.value) > -1
+                self.props.defaultValue.indexOf(option.value) > -1
                   ? true
                   : false;
             }
@@ -998,7 +973,7 @@ class RadioButtons extends React.Component {
               props.disabled = 'disabled';
               props.defaultChecked =
                 self.props.defaultValue !== undefined &&
-                  self.props.defaultValue.indexOf(option.key) > -1
+                self.props.defaultValue.indexOf(option.key) > -1
                   ? true
                   : false;
             }
@@ -1080,9 +1055,7 @@ class Rating extends React.Component {
       props.disabled = true;
       props.editing = false;
       props.rating =
-        this.props.defaultValue !== undefined
-          ? parseFloat(this.props.defaultValue, 10)
-          : 0;
+        this.props.defaultValue !== undefined ? parseFloat(this.props.defaultValue, 10) : 0;
       props.ref = this.inputField;
     }
 
@@ -1119,9 +1092,7 @@ class Rating extends React.Component {
             {this.props.data.hasOwnProperty('required') &&
               this.props.data.required === true &&
               !this.props.read_only && (
-                <span className="label-required label label-danger">
-                  Required
-                </span>
+                <span className="label-required label label-danger">Required</span>
               )}
           </label>
           <StarRating {...props} />
@@ -1192,9 +1163,7 @@ class Download extends React.Component {
           </div>
         )}
         <div className="form-group">
-          <a
-            href={this.props.download_path + '?id=' + this.props.data.file_path}
-          >
+          <a href={this.props.download_path + '?id=' + this.props.data.file_path}>
             {this.props.data.content}
           </a>
         </div>
@@ -1220,7 +1189,7 @@ class Camera extends React.Component {
       reader = new FileReader();
       reader.readAsDataURL(file);
 
-      reader.onloadend = function () {
+      reader.onloadend = function() {
         self.setState({
           img: reader.result,
         });
@@ -1277,9 +1246,7 @@ class Camera extends React.Component {
             {this.props.data.hasOwnProperty('required') &&
               this.props.data.required === true &&
               !this.props.read_only && (
-                <span className="label-required label label-danger">
-                  Required
-                </span>
+                <span className="label-required label label-danger">Required</span>
               )}
           </label>
           <div className="image-upload-container">
@@ -1303,17 +1270,10 @@ class Camera extends React.Component {
 
             {this.state.img && (
               <div>
-                <img
-                  src={this.state.img}
-                  height="100"
-                  className="image-upload-preview"
-                />
+                <img src={this.state.img} height="100" className="image-upload-preview" />
                 <br />
                 <input type="hidden" {...props} />
-                <div
-                  className="btn btn-school btn-image-clear"
-                  onClick={this.clearImage}
-                >
+                <div className="btn btn-school btn-image-clear" onClick={this.clearImage}>
                   <i className="fa fa-times" /> Clear Photo
                 </div>
               </div>
@@ -1380,8 +1340,7 @@ class Range extends React.Component {
       if (idx === 0 || idx === datalist.length - 1) w = oneBig / 2;
       option_props.key = props.list + '_label_' + idx;
       option_props.style = { width: w + '%' };
-      if (idx === datalist.length - 1)
-        option_props.style = { width: w + '%', textAlign: 'right' };
+      if (idx === datalist.length - 1) option_props.style = { width: w + '%', textAlign: 'right' };
       return <label {...option_props}>{d}</label>;
     });
 
@@ -1414,9 +1373,7 @@ class Range extends React.Component {
             {this.props.data.hasOwnProperty('required') &&
               this.props.data.required === true &&
               !this.props.read_only && (
-                <span className="label-required label label-danger">
-                  Required
-                </span>
+                <span className="label-required label label-danger">Required</span>
               )}
           </label>
           <div className="range">
@@ -1435,12 +1392,7 @@ class Range extends React.Component {
             />
           </div>
           <div className="visible_marks">{visible_marks}</div>
-          <input
-            readOnly
-            name={props.name}
-            value={this.state.value}
-            type="hidden"
-          />
+          <input readOnly name={props.name} value={this.state.value} type="hidden" />
           <datalist id={props.list}>{_datalist}</datalist>
         </div>
       </div>
