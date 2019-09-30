@@ -388,7 +388,7 @@ export default class FormElementsEdit extends React.Component {
                   isMulti={c_option.isMulti || false}
                   id={c_option.name}
                   options={c_option.options}
-                  value={this.props.element[c_option.name] || c_option.defaultValue || ''}
+                  defaultValue={this.props.element[c_option.name] || c_option.defaultValue}
                   onBlur={this.updateElement.bind(this)}
                   onChange={this.editSelectProp.bind(this, c_option.name)}
                 />
