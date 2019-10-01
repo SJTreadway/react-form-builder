@@ -893,7 +893,7 @@ class Checkboxes extends React.Component {
                     }
                   }}
                   {...props}
-                />{' '}
+                />
                 {option.text}
               </label>
             );
@@ -1369,7 +1369,7 @@ class Range extends React.Component {
         )}
         <div className="form-group">
           <label className="form-label">
-          <span dangerouslySetInnerHTML={{ __html: this.props.data.label }} />
+            <span dangerouslySetInnerHTML={{ __html: this.props.data.label }} />
             {this.props.data.hasOwnProperty('required') &&
               this.props.data.required === true &&
               !this.props.read_only && (
