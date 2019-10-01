@@ -56,7 +56,13 @@ export default class FormElementsEdit extends React.Component {
     if (values === undefined || values === null || values === '') {
       this_element[elemProperty] = '';
     } else {
-      this_element[elemProperty] = Array.isArray(values) ? values.map(v => v.value) : values.value;
+      if (Array.isArray(values)) {
+        this_element[elemProperty] = values.map(value =>
+          typeof value === 'object' ? value.value : value,
+        );
+      } else {
+        this_element[elemProperty] = values.value;
+      }
     }
     this.setState(
       {
@@ -381,6 +387,17 @@ export default class FormElementsEdit extends React.Component {
               </div>
             );
           } else if (c_option.type === 'select') {
+            const values = this.props.element[c_option.name];
+            let selectedValues = values;
+            if (c_option.isMulti) {
+              if (Array.isArray(values) && values.length > 0 && typeof values[0] === 'string') {
+                selectedValues = c_option.options.filter(option => values.includes(option.value));
+              }
+            } else {
+              if (typeof values === 'string') {
+                selectedValues = c_option.options.find(option => values === option.value);
+              }
+            }
             return (
               <div className="form-group" key={c_option.name}>
                 <label className="control-label">{c_option.label}</label>
@@ -388,7 +405,7 @@ export default class FormElementsEdit extends React.Component {
                   isMulti={c_option.isMulti || false}
                   id={c_option.name}
                   options={c_option.options}
-                  defaultValue={this.props.element[c_option.name] || c_option.defaultValue}
+                  defaultValue={selectedValues || c_option.defaultValue}
                   onBlur={this.updateElement.bind(this)}
                   onChange={this.editSelectProp.bind(this, c_option.name)}
                 />
