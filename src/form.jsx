@@ -305,6 +305,8 @@ export default class ReactForm extends React.Component {
 
   getSimpleElement(item) {
     const Element = FormElements[item.element];
+    // Do not return anything for invalid items / element
+    if (!item.element || typeof Element === 'undefined') return null;
     return <Element mutable={true} key={`form_${item.id}`} data={item} />;
   }
 
@@ -410,7 +412,7 @@ export default class ReactForm extends React.Component {
           if (item.custom) {
             return this.getCustomElement(item, this.props.answer_data);
           } else {
-            return this.getSimpleElement(item);
+            return !!item.id ? this.getSimpleElement(item) : null;
           }
       }
     });
