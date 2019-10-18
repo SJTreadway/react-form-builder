@@ -25,6 +25,8 @@ class CustomElement extends Component {
       baseClasses += ' alwaysbreak';
     }
 
+    // Return if component is invalid.
+    if (!this.props.data.component) return null;
     const Element = this.props.data.component;
 
     return (
@@ -44,19 +46,13 @@ class CustomElement extends Component {
           <label className="form-label">
             <span dangerouslySetInnerHTML={{ __html: this.props.data.label }} />
             {this.props.data.hasOwnProperty('required') &&
-            this.props.data.required === true &&
-            !this.props.read_only && (
-              <span className="label-required label label-danger">
-                  Required
-                </span>
-            )}
+              this.props.data.required === true &&
+              !this.props.read_only && (
+                <span className="label-required label label-danger">Required</span>
+              )}
           </label>
           <hr />
-          <Element
-            data={this.props.data}
-            {...this.props.data.props}
-            {...props}
-          />
+          <Element data={this.props.data} {...this.props.data.props} {...props} />
         </div>
       </div>
     );
