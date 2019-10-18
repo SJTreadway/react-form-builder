@@ -25,6 +25,8 @@ class CustomElement extends Component {
       baseClasses += ' alwaysbreak';
     }
 
+    // Return if component is invalid.
+    if (!this.props.data.component) return null;
     const Element = this.props.data.component;
 
     return (

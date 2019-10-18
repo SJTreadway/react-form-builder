@@ -409,7 +409,7 @@ export default class ReactForm extends React.Component {
             />
           );
         default:
-          if (item.custom) {
+          if (item.custom && item.element !== 'CustomSubmitButtonOptions') {
             return this.getCustomElement(item, this.props.answer_data);
           } else {
             return !!item.id ? this.getSimpleElement(item) : null;
@@ -425,7 +425,49 @@ export default class ReactForm extends React.Component {
     let backName = this.props.back_name ? this.props.back_name : 'Cancel';
 
     if (this.props.onErrors && typeof this.props.onErrors === 'function') {
-      this.customErrorSubscription = this.emitter.addListener('formValidation', this.props.onErrors)
+      this.customErrorSubscription = this.emitter.addListener(
+        'formValidation',
+        this.props.onErrors,
+      );
+    }
+
+    const customSubmitButtonData = data_items.find(
+      item => item.element === 'CustomSubmitButtonOptions',
+    );
+    let customSubmitButtonOptions = {
+      text: actionName,
+      color: 'success',
+      alignment: 'start',
+    };
+    let actionButtonParentStyles = {};
+
+    if (
+      !!customSubmitButtonData &&
+      !!customSubmitButtonData.props &&
+      !!customSubmitButtonData.props.submitButtonOptions
+    ) {
+      const options = customSubmitButtonData.props.submitButtonOptions;
+      customSubmitButtonOptions = {
+        text: !!options.text ? options.text : actionName,
+        color: !!options.color ? options.color : 'success',
+        alignment: !!options.alignment ? options.alignment : 'start',
+      };
+      const getAlignment = () => {
+        switch (options.alignment) {
+          case 'end':
+            return 'flex-end';
+          case 'center':
+            return 'center';
+          case 'start':
+          default:
+            return 'flex-start';
+        }
+      };
+      actionButtonParentStyles = {
+        display: 'flex',
+        justifyContent: getAlignment(),
+        alignItems: 'center',
+      };
     }
 
     return (
@@ -450,31 +492,23 @@ export default class ReactForm extends React.Component {
                   type="hidden"
                   value={this.props.authenticity_token}
                 />
-                <input
-                  name="task_id"
-                  type="hidden"
-                  value={this.props.task_id}
-                />
+                <input name="task_id" type="hidden" value={this.props.task_id} />
               </div>
             )}
             {items}
-            <div className="btn-toolbar">
+            <div className="btn-toolbar" style={{ ...actionButtonParentStyles }}>
               {!this.props.hide_actions && (
                 <input
                   type="submit"
-                  className="btn btn-school btn-big btn-success"
-                  value={actionName}
+                  className={`btn btn-school btn-big btn-${customSubmitButtonOptions.color}`}
+                  value={customSubmitButtonOptions.text}
                 />
               )}
-              {!this.props.hide_actions &&
-                this.props.back_action && (
-                  <a
-                    href={this.props.back_action}
-                    className="btn btn-default btn-cancel btn-big"
-                  >
-                    {backName}
-                  </a>
-                )}
+              {!this.props.hide_actions && this.props.back_action && (
+                <a href={this.props.back_action} className="btn btn-default btn-cancel btn-big">
+                  {backName}
+                </a>
+              )}
             </div>
           </form>
         </div>
