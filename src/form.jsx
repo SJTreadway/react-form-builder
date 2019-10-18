@@ -40,14 +40,9 @@ export default class ReactForm extends React.Component {
         } else {
           return;
         }
-      } else if (
-        item.element === 'Checkboxes' ||
-        item.element === 'RadioButtons'
-      ) {
+      } else if (item.element === 'Checkboxes' || item.element === 'RadioButtons') {
         item.options.forEach(option => {
-          let $option = ReactDOM.findDOMNode(
-            ref.options[`child_ref_${option.key}`],
-          );
+          let $option = ReactDOM.findDOMNode(ref.options[`child_ref_${option.key}`]);
           if (
             (option.hasOwnProperty('correct') && !$option.checked) ||
             (!option.hasOwnProperty('correct') && $option.checked)
@@ -99,25 +94,17 @@ export default class ReactForm extends React.Component {
           if ($item.value) {
             if (Array.isArray($item.value) && $item.value.length === 0) {
               invalid = true;
-            } else if (
-              Object.keys([]).length === 0 &&
-              [].constructor === Object
-            ) {
+            } else if (Object.keys([]).length === 0 && [].constructor === Object) {
               invalid = true;
             }
           }
         } else {
           return;
         }
-      } else if (
-        item.element === 'Checkboxes' ||
-        item.element === 'RadioButtons'
-      ) {
+      } else if (item.element === 'Checkboxes' || item.element === 'RadioButtons') {
         let checked_options = 0;
         item.options.forEach(option => {
-          let $option = ReactDOM.findDOMNode(
-            ref.options[`child_ref_${option.key}`],
-          );
+          let $option = ReactDOM.findDOMNode(ref.options[`child_ref_${option.key}`]);
           if ($option.checked) {
             checked_options += 1;
           }
@@ -134,7 +121,7 @@ export default class ReactForm extends React.Component {
           if ($item.value === 0) {
             invalid = true;
           }
-        } else if(item.element === 'Range') {
+        } else if (item.element === 'Range') {
           $item = {};
           $item.value = ref.state.value;
           // Needs to check for empty value except zero.
@@ -181,9 +168,7 @@ export default class ReactForm extends React.Component {
       if (item.element === 'Checkboxes' || item.element === 'RadioButtons') {
         let checked_options = [];
         item.options.forEach(option => {
-          let $option = ReactDOM.findDOMNode(
-            ref.options[`child_ref_${option.key}`],
-          );
+          let $option = ReactDOM.findDOMNode(ref.options[`child_ref_${option.key}`]);
           if ($option.checked) {
             checked_options.push(option.key);
           }
@@ -197,8 +182,7 @@ export default class ReactForm extends React.Component {
           itemData.value = ref.state.value;
         } else {
           if (item.element === 'Tags') {
-            itemData.value =
-              ref.inputField.current.state.value || ref.state.value;
+            itemData.value = ref.inputField.current.state.value || ref.state.value;
           } else if (item.element === 'DatePicker') {
             itemData.value =
               ref.inputField.current.state.value ||
@@ -322,15 +306,12 @@ export default class ReactForm extends React.Component {
     );
   }
 
-
   componentWillUnmount() {
     try {
       if (this.customErrorSubscription) {
         this.customErrorSubscription.remove();
       }
-    } catch (e) {
-
-    }
+    } catch (e) {}
   }
 
   render() {
@@ -341,14 +322,8 @@ export default class ReactForm extends React.Component {
     }
 
     data_items.forEach(item => {
-      if (
-        item.readOnly &&
-        item.variableKey &&
-        this.props.variables[item.variableKey]
-      ) {
-        this.props.answer_data[item.field_name] = this.props.variables[
-          item.variableKey
-        ];
+      if (item.readOnly && item.variableKey && this.props.variables[item.variableKey]) {
+        this.props.answer_data[item.field_name] = this.props.variables[item.variableKey];
       }
     });
 
@@ -472,10 +447,7 @@ export default class ReactForm extends React.Component {
 
     return (
       <div>
-        {
-          !this.props.onErrors &&
-          <FormValidator emitter={this.emitter} />
-        }
+        {!this.props.onErrors && <FormValidator emitter={this.emitter} />}
         <div className="react-form-builder-form">
           <form
             encType="multipart/form-data"
